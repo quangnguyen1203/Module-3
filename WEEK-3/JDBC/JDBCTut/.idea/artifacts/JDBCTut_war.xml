@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="JDBCTut:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>JDBCTut</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="JDBCTut-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="JDBCTut:war exploded" />
+    </root>
+  </artifact>
+</component>

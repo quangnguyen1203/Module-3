@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="simple_dictionary_jsp:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>simple_dictionary_jsp</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="simple_dictionary_jsp-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="simple_dictionary_jsp:war exploded" />
+    </root>
+  </artifact>
+</component>

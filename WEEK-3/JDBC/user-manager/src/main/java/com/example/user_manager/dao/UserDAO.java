@@ -1,12 +1,9 @@
 package com.example.user_manager.dao;
 
+import com.example.user_manager.model.Account;
 import com.example.user_manager.model.User;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,6 +92,43 @@ public class UserDAO implements IUserDAO{
         return users;
     }
 
+    @Override
+    public User getUserById(int id) {
+        User user = null;
+        String query = "{CALL get_user_by_id(?)}";
+        try (Connection connection = getConnection();
+             CallableStatement callableStatement = connection.prepareCall(query);
+        ) {
+            callableStatement.setInt(1,id);
+            ResultSet rs = callableStatement.executeQuery();
+            while (rs.next()){
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                String country = rs.getString("country");
+                user = new User(id,name,email,country);
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return user;
+    }
+
+    @Override
+    public void insertUserStore(User user) throws SQLException {
+        String query = "{CALL insert_user(?,?,?)}";
+        try (Connection connection = getConnection();
+        CallableStatement callableStatement = connection.prepareCall(query);
+        ) {
+            callableStatement.setString(1,user.getName());
+            callableStatement.setString(2,user.getEmail());
+            callableStatement.setString(3,user.getCountry());
+            System.out.println(callableStatement);
+            callableStatement.executeUpdate();
+        } catch (SQLException e){
+            printSQLException(e);
+        }
+    }
+
     private static final String SELECT_ALL_USERS = "select * from users";
 
     public List<User> selectAllUsers() {
@@ -177,5 +211,60 @@ public class UserDAO implements IUserDAO{
             printSQLException(e);
         }
         return users;
+    }
+
+    private static final String LOGIN_USER = "SELECT * FROM account WHERE username = ? and password = ?";
+
+    public Account loginUser(String username, String password){
+        try (Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(LOGIN_USER);
+        ) {
+            System.out.println(preparedStatement);
+            preparedStatement.setString(1,username);
+            preparedStatement.setString(2,password);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                String email = rs.getString("email");
+                return new Account(username,password,email);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    private static final String CHECK_ACCOUNT_EXIST = "SELECT * FROM account WHERE username =?";
+
+    public Account checkAccountExist(String user){
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(CHECK_ACCOUNT_EXIST);
+        ) {
+            System.out.println(preparedStatement);
+            preparedStatement.setString(1,user);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+                return new Account(user,password,email);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    private static final String SIGN_UP = "INSERT INTO account VALUES (?,?,?)";
+
+    public void signUpUser(String username, String password,String email){
+        try (Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(SIGN_UP)
+        ) {
+            preparedStatement.setString(1,username);
+            preparedStatement.setString(2,password);
+            preparedStatement.setString(3,email);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
     }
 }

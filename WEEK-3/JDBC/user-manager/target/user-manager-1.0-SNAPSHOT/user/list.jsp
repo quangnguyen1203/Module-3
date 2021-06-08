@@ -9,6 +9,9 @@
 <center>
     <h1>User Management</h1>
     <h2>
+        <a href="users?action=users">List All Users</a>
+    </h2>
+    <h2>
         <a href="/users?action=create">Add New User</a>
     </h2>
     <h2>

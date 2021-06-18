@@ -16,6 +16,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="../Home/css/manager.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <script src="/Home/js/sweetalert2.min.js"></script>
+
+    <link rel="stylesheet" href="/Home/css/sweetalert2.min.css">
     <style>
         img{
             width: 200px;
@@ -39,7 +42,6 @@
                 </div>
                 <div class="col-sm-6">
                     <a href="#addEmployeeModal"  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Account</span></a>
-                    <%--                    <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>--%>
                     <form class="form-inline active-cyan-4" method="get">
                         <input type="hidden" name="action" value="search">
                         <input name="search" value="${key}" class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
@@ -54,10 +56,7 @@
             <tr>
                 <th>ID</th>
                 <th>Username</th>
-<%--                <th>Password</th>--%>
                 <th>Email</th>
-                <th>Staff</th>
-                <th>Admin</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -66,13 +65,10 @@
                 <tr>
                     <td>${account.id}</td>
                     <td>${account.username}</td>
-<%--                    <td>${account.password}</td>--%>
                     <td>${account.email}</td>
-                    <td>${account.isSell}</td>
-                    <td>${account.isAdmin}</td>
                     <td>
                         <a href="account?action=edit&id=${account.id}"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="account?action=delete&id=${account.id}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                        <a href="#" class="delete" data-toggle="modal" ><i class="material-icons" data-toggle="tooltip" title="Delete" onclick="deleteAccount(${account.id})">&#xE872;</i></a>
                     </td>
                 </tr>
             </c:forEach>
@@ -80,13 +76,9 @@
         </table>
         <div class="clearfix">
             <ul class="pagination">
-                <li class="page-item disabled"><a href="#">Previous</a></li>
-                <li class="page-item active" ><a href="#" class="page-link">1</a></li>
-                <li class="page-item"><a href="#" class="page-link">2</a></li>
-                <li class="page-item "><a href="#" class="page-link">3</a></li>
-                <li class="page-item"><a href="#" class="page-link">4</a></li>
-                <li class="page-item"><a href="#" class="page-link">5</a></li>
-                <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                <c:forEach begin="1" end="${endPage}" var="i">
+                    <li class="page-item"><a href="account?index=${i}" class="page-link">${i}</a></li>
+                </c:forEach>
             </ul>
         </div>
     </div>
@@ -167,6 +159,29 @@
         const inputValue = searchInput.value;
         alert(inputValue);
     });
+</script>
+<script>
+    function deleteAccount(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to remove this account from the list!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Deleted!',
+                    'The account has been removed from the list.',
+                    'success'
+                ).then(() => {
+                    window.location.href = "/account?action=delete&id="+ id;
+                })
+            }
+        })
+    }
 </script>
 </body>
 </html>

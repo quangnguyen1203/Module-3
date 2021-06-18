@@ -15,7 +15,7 @@
             <div class="container">
                 <div class="card">
                     <div class="row">
-                        <aside class="col-sm-5 border-right">
+                        <aside class="col-sm-5 border-right" style="padding-right: 0px">
                             <article class="gallery-wrap">
                                 <div class="img-big-wrap">
                                     <div> <a href="#"><img src="${detail.image}"></a></div>

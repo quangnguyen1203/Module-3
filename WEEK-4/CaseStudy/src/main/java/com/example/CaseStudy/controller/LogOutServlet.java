@@ -17,10 +17,10 @@ public class LogOutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-//        session.removeAttribute("acc");
+        session.removeAttribute("acc");
 //        request.getRequestDispatcher("index.jsp").forward(request,response);
 //        response.sendRedirect("index.jsp");
-        session.invalidate();
+//        session.invalidate();
         ProductDAO productDAO = new ProductDAO();
         CategoryDAO categoryDAO = new CategoryDAO();
         List<Product> productList = productDAO.getAllProduct();

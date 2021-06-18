@@ -70,8 +70,21 @@ public class ManagerAccountServlet extends HttpServlet {
 
     private void listAccount(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        List<Account> accountList = accountDAO.selectAllAccount();
-        request.setAttribute("accountList", accountList);
+        String indexPage = request.getParameter("index");
+        if(indexPage == null){
+            indexPage = "1";
+        }
+        int index = Integer.parseInt(indexPage);
+
+        AccountDAO accountDAO = new AccountDAO();
+        int count = accountDAO.getTotalAccount();
+        int endPage = count/5;
+        if(count % 5 != 0){
+            endPage++;
+        }
+        List<Account> list = accountDAO.pagingAccount(index);
+        request.setAttribute("accountList",list);
+        request.setAttribute("endPage",endPage);
         RequestDispatcher dispatcher = request.getRequestDispatcher("product/ManagerAccount.jsp");
         dispatcher.forward(request, response);
     }
@@ -119,15 +132,27 @@ public class ManagerAccountServlet extends HttpServlet {
         accountDAO.updateAccount(book);
         List<Account> accountList = accountDAO.selectAllAccount();
         request.setAttribute("accountList", accountList);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("product/ManagerAccount.jsp");
-        dispatcher.forward(request, response);
+        response.sendRedirect("account");
     }
 
     private void deleteAccount(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         int id = Integer.parseInt(request.getParameter("id"));
         accountDAO.deleteAccount(id);
-        List<Account> accountList = accountDAO.selectAllAccount();
+        String indexPage = request.getParameter("index");
+        if(indexPage == null){
+            indexPage = "1";
+        }
+        int index = Integer.parseInt(indexPage);
+
+        AccountDAO accountDAO = new AccountDAO();
+        int count = accountDAO.getTotalAccount();
+        int endPage = count/5;
+        if(count % 5 != 0){
+            endPage++;
+        }
+        List<Account> accountList = accountDAO.pagingAccount(index);
+        request.setAttribute("endPage",endPage);
         request.setAttribute("accountList", accountList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("product/ManagerAccount.jsp");
         dispatcher.forward(request, response);

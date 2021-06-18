@@ -7,11 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Bootstrap Elegant Sign Up Form with Icons</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+    <link href="/Home/css/main.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<%--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">--%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
     <style>
         body {
             color: #999;
@@ -23,7 +27,7 @@
             border-radius: 0;
         }
         .signup-form {
-            width: 390px;
+            width: 40%;
             margin: 0 auto;
             padding: 30px 0;
         }
@@ -97,44 +101,49 @@
             font-size: 7px;
             position: absolute;
         }
+        div.error{
+            font-size: 1.2em;
+            color: red;
+            font-style: oblique;
+        }
     </style>
 </head>
 <body>
 <div class="signup-form">
-    <form action="signup" method="post">
+    <form action="signup" method="post" id="registration">
         <h2>Create Account</h2>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-account"></i></span>
-                <input type="text" class="form-control" name="username" placeholder="Username" required="required">
+                <span class="input-group-addon col-1"><i class="fas fa-user"></i></span>
+                <input type="text" class="form-control col-11" name="username" id="username" placeholder="Username">
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
-                <input type="email" class="form-control" name="email" placeholder="Email Address" required="required">
+                <span class="input-group-addon col-1"><i class="fa fa-paper-plane"></i></span>
+                <input type="email" class="form-control col-11" name="email" id="email" placeholder="Email Address">
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+                <span class="input-group-addon col-1"><i class="fa fa-lock"></i></span>
+                <input type="password" class="form-control col-11" name="password" id="password" placeholder="Password">
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
-				<span class="input-group-addon">
+				<span class="input-group-addon col-1">
 					<i class="fa fa-lock"></i>
 					<i class="fa fa-check"></i>
 				</span>
-                <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
+                <input type="password" class="form-control col-11" name="confirm_password" id="confirm_password" placeholder="Confirm Password">
             </div>
         </div>
-        <p>
-            <c:if test='${message != null}'>
-                <span class="message">${message}</span>
-            </c:if>
-        </p>
+<%--        <p>--%>
+<%--            <c:if test='${message != null}'>--%>
+<%--                <span class="message btn-danger">${message}</span>--%>
+<%--            </c:if>--%>
+<%--        </p>--%>
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block btn-lg">Sign Up</button>
         </div>
@@ -144,4 +153,47 @@
     </form>
 </div>
 </body>
+<script>
+    $("#registration").validate({
+        errorElement: 'div',
+        rules: {
+            username: "required",
+            email: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true,
+                validatePassword: true,
+                minlength: 5
+            },
+            confirm_password: {
+                equalTo: "#password",
+                required: true,
+                minlength: 5
+            }
+        },
+
+        messages: {
+            username: "Please enter your username",
+            password: {
+                required: "Please provide a password",
+                minlength: "Your password must be at least 5 characters long"
+            },
+            confirm_password: {
+                required: "Please provide a password",
+                minlength: "Your password must be at least 5 characters long",
+                equalTo: "Please enter the correct password above"
+            },
+            email: "Please enter a valid email address"
+        },
+
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+    $.validator.addMethod("validatePassword", function (value, element) {
+        return this.optional(element) || /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/i.test(value);
+    }, "Please enter a password from 8 to 16 characters including uppercase, lowercase and at least one number");
+</script>
 </html>

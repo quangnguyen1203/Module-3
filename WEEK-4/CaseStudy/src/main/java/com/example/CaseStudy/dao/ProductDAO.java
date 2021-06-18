@@ -48,9 +48,8 @@ public class ProductDAO {
 
     public List<Product> getAllProduct() {
         List<Product> list = new ArrayList<>();
-        String query = "SELECT p.id,p.name,p.image,p.price,p.title,p.description,c.c_id,c.c_name  FROM products p\n" +
-                "inner join categories c on \n" +
-                "p.cat_id = c.c_id;";
+        String query = "SELECT p.id,p.name,p.image,p.price,p.title,p.description,c.c_id,c.c_name  FROM products p inner join categories c on p.cat_id = c.c_id\n" +
+                "ORDER BY id desc;";
         try(Connection conn = getConnection();
             PreparedStatement ps = conn.prepareStatement(query)
         ) {
@@ -66,7 +65,7 @@ public class ProductDAO {
                 Category category = new Category(rs.getInt("c_id"),rs.getString("c_name"));
                 list.add(new Product(id,name,image,price,title,description,category));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return list;
     }
@@ -223,9 +222,76 @@ public class ProductDAO {
         }
     }
 
+    public int getTotalProduct(){
+        String query = "SELECT COUNT(*) FROM products";
+        try (Connection connection = getConnection();
+        PreparedStatement ps = connection.prepareStatement(query)
+        ) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return 0;
+    }
+
+    public List<Product> pagingProduct(int index) {
+        List<Product> list = new ArrayList<>();
+        String query = "SELECT p.id,p.name,p.image,p.price,p.title,p.description,c.c_id,c.c_name  FROM products p inner join categories c on p.cat_id = c.c_id\n" +
+                "ORDER BY id DESC\n" +
+                "LIMIT 5 offset ?;";
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(query)
+        ) {
+            ps.setInt(1, ((index - 1) * 5));
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String image = rs.getString("image");
+                double price = rs.getDouble("price");
+                String title = rs.getString("title");
+                String description = rs.getString("description");
+                Category category = new Category(rs.getInt("c_id"), rs.getString("c_name"));
+                list.add(new Product(id, name, image, price, title, description, category));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<Product> pagingHome(int index) {
+        List<Product> list = new ArrayList<>();
+        String query = "SELECT p.id,p.name,p.image,p.price,p.title,p.description,c.c_id,c.c_name  FROM products p inner join categories c on p.cat_id = c.c_id\n" +
+                "ORDER BY id DESC\n" +
+                "LIMIT 12 offset ?;";
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(query)
+        ) {
+            ps.setInt(1, ((index - 1) * 12));
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String image = rs.getString("image");
+                double price = rs.getDouble("price");
+                String title = rs.getString("title");
+                String description = rs.getString("description");
+                Category category = new Category(rs.getInt("c_id"), rs.getString("c_name"));
+                list.add(new Product(id, name, image, price, title, description, category));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-        List<Product> list = dao.getAllProduct();
+        List<Product> list = dao.pagingProduct(1);
         for (Product o : list
              ) {
             System.out.println(o);

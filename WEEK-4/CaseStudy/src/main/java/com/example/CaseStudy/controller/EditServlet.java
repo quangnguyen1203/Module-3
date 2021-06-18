@@ -33,6 +33,6 @@ public class EditServlet extends HttpServlet {
 
         ProductDAO productDAO = new ProductDAO();
         productDAO.updateProduct(pname,pimage,pprice,ptitle,pdescription,pcategory,pid);
-        request.getRequestDispatcher("managers").forward(request,response);
+        request.getRequestDispatcher("home").forward(request,response);
     }
 }

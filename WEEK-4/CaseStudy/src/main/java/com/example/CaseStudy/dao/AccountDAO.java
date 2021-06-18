@@ -1,6 +1,8 @@
 package com.example.CaseStudy.dao;
 
 import com.example.CaseStudy.model.Account;
+import com.example.CaseStudy.model.Category;
+import com.example.CaseStudy.model.Product;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -177,6 +179,46 @@ public class AccountDAO {
             preparedStatement.setString(3,keyWord);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("username");
+                String pass = rs.getString("password");
+                String email = rs.getString("email");
+                int sell = rs.getInt("isSell");
+                int admin = rs.getInt("isAdmin");
+                accounts.add(new Account(id,name,pass,email,sell,admin));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return accounts;
+    }
+
+    public int getTotalAccount(){
+        String query = "SELECT COUNT(*) FROM accounts";
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(query)
+        ) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return 0;
+    }
+
+    public List<Account> pagingAccount(int index) {
+        List<Account> accounts = new ArrayList<>();
+        String query = "SELECT * FROM accounts \n" +
+                "ORDER BY id \n" +
+                "LIMIT 5 OFFSET ?;";
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(query)
+        ) {
+            ps.setInt(1, ((index - 1) * 5));
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("username");

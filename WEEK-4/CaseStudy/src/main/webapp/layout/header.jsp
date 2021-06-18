@@ -40,7 +40,7 @@
                         </li>
                     </c:if>
                     <li class="tytyu">
-                        <a href="#"> <img style="margin-right: 15px;" src="Home/icon/2.png" alt="#" /></a>
+                        <a href="cart.jsp"> <img style="margin-right: 15px;" src="Home/icon/2.png" alt="#" /></a>
 
                     </li>
                     <li class="menu_iconb">

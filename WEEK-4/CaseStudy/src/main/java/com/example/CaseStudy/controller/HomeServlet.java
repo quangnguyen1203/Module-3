@@ -22,15 +22,29 @@ public class HomeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         listProduct(request,response);
     }
 
     public void listProduct(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+        String indexPage = request.getParameter("index");
+        if(indexPage == null){
+            indexPage = "1";
+        }
+        int index = Integer.parseInt(indexPage);
+
         ProductDAO productDAO = new ProductDAO();
+        int count = productDAO.getTotalProduct();
+        int endPage = count/12;
+        if(count % 12 != 0){
+            endPage++;
+        }
+        List<Product> list = productDAO.pagingHome(index);
+
         CategoryDAO categoryDAO = new CategoryDAO();
-        List<Product> productList = productDAO.getAllProduct();
         List<Category> categoryList = categoryDAO.getAllCategory();
-        request.setAttribute("productList",productList);
+        request.setAttribute("productList",list);
+        request.setAttribute("endPage",endPage);
         request.setAttribute("categoryList", categoryList);
         request.getRequestDispatcher("index.jsp").forward(request,response);
     }

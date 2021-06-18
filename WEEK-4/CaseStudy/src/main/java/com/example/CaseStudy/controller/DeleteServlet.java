@@ -15,7 +15,7 @@ public class DeleteServlet extends HttpServlet {
         int pid = Integer.parseInt(request.getParameter("pid"));
         ProductDAO productDAO = new ProductDAO();
         productDAO.deleteProduct(pid);
-        response.sendRedirect("managers");
+        response.sendRedirect("home");
     }
 
     @Override

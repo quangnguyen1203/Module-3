@@ -18,6 +18,7 @@ public class AddServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String pname = request.getParameter("name");
         String pimage = request.getParameter("image");
         double pprice = Double.parseDouble(request.getParameter("price"));
@@ -34,6 +35,6 @@ public class AddServlet extends HttpServlet {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        response.sendRedirect("managers");
+        response.sendRedirect("home");
     }
 }

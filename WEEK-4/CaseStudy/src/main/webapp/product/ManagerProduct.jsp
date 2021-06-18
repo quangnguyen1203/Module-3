@@ -3,7 +3,7 @@
     Created on : Dec 28, 2020, 5:19:02 PM
     Author     : trinh
 --%>
-
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,10 +21,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="../Home/css/manager.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <script src="/Home/js/sweetalert2.min.js"></script>
+
+    <link rel="stylesheet" href="/Home/css/sweetalert2.min.css">
     <style>
         img{
             width: 200px;
             height: 120px;
+            object-fit: cover;
         }
         .active-cyan input[type=text] {
             border-bottom: 1px solid #4dd0e1;
@@ -44,7 +48,6 @@
                 </div>
                 <div class="col-sm-6">
                     <a href="#addEmployeeModal"  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
-<%--                    <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>--%>
                     <form class="form-inline active-cyan-4" method="get" action="search">
                         <input name="search" value="${key}" class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
                                aria-label="Search">
@@ -67,7 +70,7 @@
                 <th>Image</th>
                 <th>Price</th>
                 <th>Title</th>
-                <th>Description</th>
+<%--                <th>Description</th>--%>
                 <th>Category</th>
                 <th>Actions</th>
             </tr>
@@ -78,29 +81,30 @@
                     <td>${o.id}</td>
                     <td>${o.name}</td>
                     <td>
-                        <img src="${o.image}">
+                        <img class="product_image" src="${o.image}">
                     </td>
-                    <td>${o.price} $</td>
+<%--                    <td>${o.price} $</td>--%>
+                    <td>
+                        <fmt:setLocale value = "en_US"/>
+                        <fmt:formatNumber value = "${o.price}" type = "currency"/>
+                    </td>
                     <td>${o.title}</td>
-                    <td>${o.description}</td>
+<%--                    <td>${o.description}</td>--%>
                     <td>${o.category.getCname()}</td>
                     <td>
                         <a href="loadProduct?pid=${o.id}"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="delete?pid=${o.id}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                        <a href="#" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete" onclick="deleteProduct(${o.id})">&#xE872;</i></a>
                     </td>
+<%--                    delete?pid=${o.id}--%>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
         <div class="clearfix">
             <ul class="pagination">
-                <li class="page-item disabled"><a href="#">Previous</a></li>
-                <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                <li class="page-item"><a href="#" class="page-link">2</a></li>
-                <li class="page-item "><a href="#" class="page-link">3</a></li>
-                <li class="page-item"><a href="#" class="page-link">4</a></li>
-                <li class="page-item"><a href="#" class="page-link">5</a></li>
-                <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                <c:forEach begin="1" end="${endP}" var="i">
+                    <li class="page-item"><a href="home?index=${i}" class="page-link">${i}</a></li>
+                </c:forEach>
             </ul>
         </div>
     </div>
@@ -189,6 +193,30 @@
         const inputValue = searchInput.value;
         alert(inputValue);
     });
+</script>
+<script>
+    function deleteProduct(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to remove this product from the product list !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText:'Yes, delete it!',
+            closeOnConfirm: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Deleted!',
+                    'The product has been removed from the list.',
+                    'success'
+                ).then(() => {
+                    window.location.href = "delete?pid="+ id;
+                })
+            }
+        })
+    }
 </script>
 </body>
 </html>

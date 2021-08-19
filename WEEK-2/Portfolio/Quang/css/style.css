@@ -15,6 +15,19 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
+
+body {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.2rem;
+}
+
+h5{
+  font-size: 1.2rem;
+}
+#img_certificate{
+  width: 500px;
+  height: 400px;
+}
 /* Titles */
 
 h1, h2, h3, h4, h5, h6 {
@@ -443,8 +456,8 @@ img{
 
 .skillbar-title {
   color: white;
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 400;
   text-transform: uppercase;
   display: inline-block;
 }
@@ -453,8 +466,8 @@ img{
   float: right;
   display: inline-block;
   color: white;
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 400;
   text-transform: uppercase;
 }
 

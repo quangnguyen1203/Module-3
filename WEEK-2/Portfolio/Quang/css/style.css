@@ -19,7 +19,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway";
-  font-weight: 300;
+  font-weight: 500;
   color: #333;
 }
 
@@ -146,7 +146,7 @@ By default, top navigation bar uses "fixed" position
 }
 
 #section-topbar i {
-  font-size: 25px;
+  font-size: 1.2rem;
 }
 
 /*---------------------------------------------------
@@ -278,11 +278,11 @@ SECTION WRAPS
 }
 
 .desc more {
-  color: #95a5a6;
+  color: black;
 }
 
 sm {
-  font-size: 12px;
+  font-size: 1.2rem;
 }
 
 /* Contact Form */
@@ -295,7 +295,7 @@ sm {
   padding: 10px 12px;
   border-radius: 0;
   box-shadow: none;
-  font-size: 14px;
+  font-size: 1.2rem;
   height: auto;
 }
 
@@ -321,7 +321,7 @@ sm {
   color: red;
   margin: 0 0 15px 0;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 1.2rem;
 }
 
 .contact-form .loading {
@@ -412,4 +412,57 @@ sm {
   position: absolute;
   top: 43px;
   left: 124px;
+}
+
+img{
+  width: 400px;
+}
+
+.skillbar {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.skillbar-bar:before {
+  background: #eee;
+  content: "";
+  height: 3px;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+
+.skillbar-bar {
+  height: 10px;
+  width: 0px;
+  background: #a2d5c6;
+  transition-property: width, background-color;
+}
+
+.skillbar-title {
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.skill-bar-percent {
+  float: right;
+  display: inline-block;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* CENTERING ONLY */
+
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
 }

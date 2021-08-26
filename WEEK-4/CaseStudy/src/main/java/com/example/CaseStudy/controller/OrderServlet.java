@@ -14,10 +14,8 @@ import java.util.List;
 public class OrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Order orders = (Order) request.getSession().getAttribute("order");
-        request.setAttribute("orders",orders);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("cart.jsp");
-        dispatcher.forward(request,response);
+        request.getSession().removeAttribute("order");
+        request.getRequestDispatcher("/index").forward(request,response);
     }
 
     @Override

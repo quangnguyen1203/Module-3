@@ -32,7 +32,7 @@
                     </span>
                 </c:if>
                 <span class="tytyu">
-                    <a href="cart.jsp"></a>
+                    <a href="cart.jsp"><i class="fas fa-cart-arrow-down"></i></a>
                 </span>
                 <span class="menu_iconb">
                     <a href="#"></a>

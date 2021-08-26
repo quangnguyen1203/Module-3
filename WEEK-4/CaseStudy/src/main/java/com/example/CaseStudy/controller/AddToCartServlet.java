@@ -38,6 +38,16 @@ public class AddToCartServlet extends HttpServlet {
                     order.setItems(listItems);
                     order.setTotal((long) (item.getQuantity()*item.getPrice()));
                     session.setAttribute("order",order);
+                    long sub_total = 0;
+                    for (Item i : listItems
+                         ) {
+                        sub_total += i.getQuantity()*i.getProduct().getPrice();
+                    }
+                    long tax = (long) (sub_total*0.1);
+                    long total = sub_total + tax;
+                    session.setAttribute("sub_total",sub_total);
+                    session.setAttribute("tax",tax);
+                    session.setAttribute("total",total);
                 } else {
                     Order order = (Order) session.getAttribute("order");
                     List<Item> listItems = order.getItems();
@@ -56,6 +66,16 @@ public class AddToCartServlet extends HttpServlet {
                         item.setPrice(product.getPrice());
                         order.setTotal((long) (item.getQuantity()*item.getPrice()));
                         listItems.add(item);
+                        long sub_total = 0;
+                        for (Item i : listItems
+                        ) {
+                            sub_total += i.getQuantity()*i.getProduct().getPrice();
+                        }
+                        long tax = (long) (sub_total*0.1);
+                        long total = sub_total + tax;
+                        session.setAttribute("sub_total",sub_total);;
+                        session.setAttribute("tax",tax);
+                        session.setAttribute("total",total);
                     }
                     session.setAttribute("order",order);
                 }

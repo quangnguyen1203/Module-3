@@ -11,6 +11,14 @@
     <!-- site metas -->
     <title>Quang Store</title>
     <%@ include file="layout/head.jsp" %>
+    <style>
+        .pagination{
+            margin-top: 20px !important;
+        }
+        .page-link{
+            color: black;
+        }
+    </style>
 </head>
 <!-- body -->
 

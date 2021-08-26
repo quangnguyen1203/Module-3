@@ -32,7 +32,7 @@
                     </span>
                 </c:if>
                 <span class="tytyu">
-                    <a href="cart.jsp"></a>
+                    <a href="cart.jsp"><i class="fas fa-cart-arrow-down"></i></a>
                 </span>
                 <span class="menu_iconb">
                     <a href="#"></a>
@@ -44,47 +44,6 @@
                     </button>
                 </span>
             </div>
-
-<%--            <ul>--%>
-<%--                <c:if test="${sessionScope.acc.isAdmin == 1}">--%>
-<%--                    <li class="menu_iconb">--%>
-<%--                        <a href="account">Manager Account</a>--%>
-<%--                    </li>--%>
-<%--                </c:if>--%>
-<%--                <c:if test="${sessionScope.acc.isSell == 1}">&ndash;%&gt;--%>
-<%--                    <li class="menu_iconb">--%>
-<%--                        <a href="home">Manager Product</a>--%>
-<%--                    </li>--%>
-<%--                </c:if>--%>
-<%--                <c:if test="${sessionScope.acc == null}">--%>
-<%--                    <li class="menu_iconb">--%>
-<%--                        <a href="login.jsp">Log in</a>--%>
-<%--                    </li>--%>
-<%--                    <li class="menu_iconb">--%>
-<%--                        <a href="signup.jsp">Sign up</a>--%>
-<%--                    </li>--%>
-<%--                </c:if>--%>
-<%--                <c:if test="${sessionScope.acc != null}">--%>
-<%--                    <li>--%>
-<%--                        Hello <c:out value="${sessionScope.acc.username}"></c:out>--%>
-<%--                    </li>--%>
-<%--                    <li class="menu_iconb">--%>
-<%--                        <a href="logout">Log out</a>--%>
-<%--                    </li>--%>
-<%--                </c:if>--%>
-<%--                <li class="tytyu">--%>
-<%--                    <a href="cart.jsp"></a>--%>
-<%--                </li>--%>
-<%--                <li class="menu_iconb">--%>
-<%--                    <a href="#"></a>--%>
-<%--                </li>--%>
-
-<%--                <li>--%>
-<%--                    <button type="button" id="sidebarCollapse">--%>
-<%--                        <i class="fas fa-align-justify"></i>--%>
-<%--                    </button>--%>
-<%--                </li>--%>
-<%--            </ul>--%>
         </form>
     </div>
 </nav>

@@ -7,6 +7,10 @@ public class Category {
     public Category() {
     }
 
+    public Category(String cname) {
+        this.cname = cname;
+    }
+
     public Category(int cid, String cname) {
         this.cid = cid;
         this.cname = cname;

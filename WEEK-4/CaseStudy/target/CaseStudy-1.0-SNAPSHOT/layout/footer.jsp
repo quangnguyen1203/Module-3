@@ -9,10 +9,10 @@
 <%--                        </div>--%>
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                             <ul class="sociel">
-                                <li> <a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                                <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
-                                <li> <a href="#"><i class="fa fa-github"></i></a></li>
+                                <li> <a href="#"><i class="fab fa-facebook"></i></a></li>
+                                <li> <a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li> <a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <li> <a href="#"><i class="fab fa-github-square"></i></a></li>
                             </ul>
                         </div>
                     </div>

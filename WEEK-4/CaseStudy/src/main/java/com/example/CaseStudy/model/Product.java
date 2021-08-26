@@ -9,6 +9,7 @@ public class Product {
     private String description;
     public Category category;
     private Account account;
+
     public Product() {
     }
 
@@ -41,7 +42,6 @@ public class Product {
         this.category = category;
         this.account = account;
     }
-
 
     public Account getAccount() {
         return account;

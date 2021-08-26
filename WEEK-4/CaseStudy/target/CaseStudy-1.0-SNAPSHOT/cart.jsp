@@ -13,7 +13,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-
+    <style>
+        .table td, .table th {
+            vertical-align: middle !important;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -22,10 +26,10 @@
             <!-- Shopping cart table -->
             <div class="table-responsive">
                 <table class="table">
-                    <thead>
+                    <thead class="text-center">
                     <tr>
                         <th scope="col" class="border-0 bg-light">
-                            <div class="p-2 px-3 text-uppercase">Product</div>
+                            <div class="p-2 px-3 text-uppercase text-left">Product</div>
                         </th>
                         <th scope="col" class="border-0 bg-light">
                             <div class="py-2 text-uppercase">Price</div>
@@ -34,24 +38,24 @@
                             <div class="py-2 text-uppercase">Quantity</div>
                         </th>
                         <th scope="col" class="border-0 bg-light">
-                            <div class="py-2 text-uppercase">Remove</div>
+                            <div class="py-2 text-uppercase">Action</div>
                         </th>
                     </tr>
                     </thead>
                     <tbody>
                         <c:forEach items="${order.items}" var="item">
                             <tr>
-                                <th scope="row" class="border-0">
-                                    <div class="p-2">
+                                <td scope="row" class="border-0">
+                                    <div>
                                         <img src="${item.product.image}" alt="" width="70" class="img-fluid rounded shadow-sm">
                                         <div class="ml-3 d-inline-block align-middle">
-                                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">${item.product.name}</a></h5><span class="text-muted font-weight-normal font-italic d-block">Category: ${item.category.getName()}</span>
+                                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">${item.product.name}</a></h5>
                                         </div>
                                     </div>
-                                </th>
-                                <td class="border-0 align-middle"><strong>${item.product.price}</strong></td>
-                                <td class="border-0 align-middle"><strong>${item.quantity}</strong></td>
-                                <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                                </td>
+                                <td class="border-0 text-right"><strong>$ ${item.product.price}</strong></td>
+                                <td class="border-0 text-right"><strong>${item.quantity}</strong></td>
+                                <td class="border-0 text-center"><a href="#" class="btn btn-outline-danger"><i class="fa fa-trash"></i>Delete</a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -60,6 +64,7 @@
             <!-- End -->
         </div>
     </div>
+
 
     <div class="row py-5 p-4 bg-white rounded shadow-sm">
         <div class="col-lg-6">
@@ -73,27 +78,24 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Instructions for seller</div>
-            <div class="p-4">
-                <p class="font-italic mb-4">If you have some information for the seller you can leave them in the box below</p>
-                <textarea name="" cols="30" rows="2" class="form-control"></textarea>
-            </div>
         </div>
         <div class="col-lg-6">
-            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
-            <div class="p-4">
-                <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
-                <ul class="list-unstyled mb-4">
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>${item.product.price*item.quantity}</strong></li>
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and handling</strong><strong>${item.product.price*item.quantity*0.1}</strong></li>
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>$0.00</strong></li>
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                        <h5 class="font-weight-bold">${(item.product.price*item.quantity) + (item.product.price*item.quantity*0.1)}</h5>
-                    </li>
-                </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
-            </div>
+            <form action="listOrder" method="get">
+                <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+                <div class="p-4">
+                    <ul class="list-unstyled mb-4">
+                        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>$ ${item.product.price*item.quantity}</strong></li>
+                        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>$ ${item.product.price*item.quantity*0.1}</strong></li>
+                        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
+                            <h5 class="font-weight-bold">$ ${(item.product.price*item.quantity) + (item.product.price*item.quantity*0.1)}</h5>
+                        </li>
+                    </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Payment</a>
+                </div>
+            </form>
         </div>
     </div>
+
+
 </div>
 </body>
 </html>

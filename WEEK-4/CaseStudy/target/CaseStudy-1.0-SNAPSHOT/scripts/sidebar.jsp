@@ -1,7 +1,5 @@
 <!-- sidebar -->
-<script src="Home/js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="Home/js/custom.js"></script>
-<script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         $("#sidebar").mCustomScrollbar({
@@ -20,9 +18,7 @@
             $('a[aria-expanded=true]').attr('aria-expanded', 'false');
         });
     });
-</script>
 
-<script>
     $(document).ready(function() {
         $(".fancybox").fancybox({
             openEffect: "none",
@@ -38,3 +34,6 @@
         });
     });
 </script>
+<script src="Home/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<%--<script src="Home/js/custom.js"></script>--%>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>

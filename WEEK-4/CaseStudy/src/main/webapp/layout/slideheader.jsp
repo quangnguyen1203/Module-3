@@ -1,7 +1,7 @@
 <div class="banner_main">
-    <div class="container-fluid padding3">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mapimg">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                 <div class="text-bg">
                     <h1>Quang <br>
                         Store<br>
@@ -11,54 +11,16 @@
                 </div>
             </div>
             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
-                <div id="myCarousel" class="carousel slide banner_Client" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
-                    </ol>
+                <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="container">
-                                <div class="carousel-caption text">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="img_bg">
-                                                <figure><img src="Home/images/Louis-Vuitton-Monogram-Speedy-3945-9134-1583222597.jpg" /></figure>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
+                        <div class="carousel-item active img_bg" data-bs-interval="3000">
+                            <img class="slide-img" src="Home/images/Louis-Vuitton-Monogram-Speedy-3945-9134-1583222597.jpg" alt="...">
                         </div>
-                        <div class="carousel-item">
-                            <div class="container">
-                                <div class="carousel-caption text">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="img_bg">
-                                                <figure><img src="Home/images/Gucci-Aria-MF-Online-95-1.jpg" style="width: 500px;height: 347px"/></figure>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
+                        <div class="carousel-item img_bg" data-bs-interval="2000">
+                            <img class="slide-img" src="Home/images/Gucci-Aria-MF-Online-95-1.jpg" alt="...">
                         </div>
-                        <div class="carousel-item">
-                            <div class="container">
-                                <div class="carousel-caption text">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="img_bg">
-                                                <figure><img src="Home/images/nike.jpg" style="width: 500px;height: 347px" /></figure>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
+                        <div class="carousel-item img_bg" data-bs-interval="2000">
+                            <img class="slide-img" src="Home/images/nike.jpg" alt="...">
                         </div>
                     </div>
                 </div>

@@ -16,7 +16,7 @@
                 <c:forEach items="${productList}" var="o">
                     <div class="product col-12 col-md-6 col-lg-4">
                         <div class="card">
-                            <img class="card-img-top" src="${o.image}" alt="Card image cap" style="width: 400px;height: 300px">
+                            <img class="card-img-top" src="${o.image}" alt="Card image cap">
                             <div class="card-body">
                                 <h4 class="card-title show_txt" style="width: 200px; white-space: nowrap;  overflow: hidden; text-overflow: ellipsis"><a href="detail?pid=${o.id}" title="View Product">${o.name}</a></h4>
                                 <p class="card-text show_txt" style="width: 200px; white-space: nowrap;  overflow: hidden; text-overflow: ellipsis">${o.title}</p>
@@ -26,7 +26,7 @@
                                     </div>
                                     <div class="col">
 <%--                                        <c:url value="/addtoCart?productId=${o.id}" var="addtoCart"/>--%>
-                                        <a href="addtoCart?productId=${o.id}" class="btn btn-success btn-block">Add to cart</a>
+                                        <a href="addToCart?productId=${o.id}" class="btn btn-success btn-block">Add to cart</a>
                                     </div>
                                 </div>
                             </div>

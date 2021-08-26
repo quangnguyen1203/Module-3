@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "AddToCartServlet", urlPatterns = "/addtoCart")
+@WebServlet(name = "AddToCartServlet", urlPatterns = "/addToCart")
 public class AddToCartServlet extends HttpServlet {
     ProductDAO productDAO = new ProductDAO();
     @Override
@@ -36,6 +36,7 @@ public class AddToCartServlet extends HttpServlet {
                     item.setPrice(product.getPrice());
                     listItems.add(item);
                     order.setItems(listItems);
+                    order.setTotal((long) (item.getQuantity()*item.getPrice()));
                     session.setAttribute("order",order);
                 } else {
                     Order order = (Order) session.getAttribute("order");
@@ -53,14 +54,15 @@ public class AddToCartServlet extends HttpServlet {
                         item.setQuantity(quantity);
                         item.setProduct(product);
                         item.setPrice(product.getPrice());
+                        order.setTotal((long) (item.getQuantity()*item.getPrice()));
                         listItems.add(item);
                     }
                     session.setAttribute("order",order);
                 }
             }
-            request.getRequestDispatcher("index").forward(request,response);
+            request.getRequestDispatcher("/index").forward(request,response);
         } else {
-            request.getRequestDispatcher("index").forward(request,response);
+            request.getRequestDispatcher("cart.jsp").forward(request,response);
         }
     }
 

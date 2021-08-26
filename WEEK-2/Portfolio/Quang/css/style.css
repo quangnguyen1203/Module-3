@@ -33,7 +33,7 @@ h5{
 h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway";
   font-weight: 500;
-  color: #333;
+  /* color: #333; */
 }
 
 /* Paragraph & Typographic */
@@ -217,14 +217,14 @@ SECTION WRAPS
   vertical-align: middle;
 }
 
-#skillswrap {
+#skills {
   background: #2c3e50;
   padding-top: 60px;
   padding-bottom: 60px;
   color: white;
 }
 
-#skillswrap h5, p {
+#skills h5, p {
   color: white;
 }
 
@@ -403,9 +403,9 @@ sm {
 }
 
 .img-responsive1{
-  display: block;
   max-width: 100%;
-  height: 400px;
+  height: 300px;
+  object-fit: cover;
 }
 
 .percent {
@@ -486,4 +486,20 @@ img{
 
 label{
   margin-bottom: 10px !important;
+}
+
+.stretched-link::after{
+  content: none;
+}
+
+tr{
+  line-height: 50px;
+}
+
+
+.testimonial-img {
+  width: 120px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  margin: 0 auto;
 }

@@ -6,6 +6,7 @@ public class Order {
     private int id;
     private Account customer;
     private List<Item> items;
+    private long total;
     private int status;
 
     public Order() {
@@ -16,6 +17,21 @@ public class Order {
         this.id = id;
         this.customer = customer;
         this.items = items;
+        this.status = status;
+    }
+
+    public Order(int id, Account customer, List<Item> items, long total, int status) {
+        this.id = id;
+        this.customer = customer;
+        this.items = items;
+        this.total = total;
+        this.status = status;
+    }
+
+    public Order(Account customer, List<Item> items, long total, int status) {
+        this.customer = customer;
+        this.items = items;
+        this.total = total;
         this.status = status;
     }
 
@@ -49,5 +65,13 @@ public class Order {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public long getTotal() {
+        return total;
+    }
+
+    public void setTotal(long total) {
+        this.total = total;
     }
 }

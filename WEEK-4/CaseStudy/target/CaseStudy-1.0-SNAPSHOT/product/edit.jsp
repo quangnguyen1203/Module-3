@@ -42,11 +42,11 @@
     <div id="editEmployeeModal">
         <div class="modal-dialog">
             <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Product</h4>
+                    <button type="button" class="btn btn-close" data-dismiss="modal" aria-hidden="true"></button>
+                </div>
                 <form action="edit" method="post">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Edit Product</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
                     <div class="modal-body">
                         <div class="form-group">
                             <label>ID</label>
@@ -76,7 +76,7 @@
                             <label>Category</label>
                             <select name="category" class="form-select" aria-label="Default select example">
                                 <c:forEach items="${listCC}" var="o">
-                                    <option value="${o.cid}">${o.cname}</option>
+                                    <option value="${o.cid}" selected>${o.cname}</option>
                                 </c:forEach>
                             </select>
                         </div>

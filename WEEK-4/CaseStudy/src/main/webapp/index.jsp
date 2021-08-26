@@ -28,7 +28,7 @@
             <div class="head_top">
                 <div class="header">
                     <%@ include file="layout/header.jsp"%>
-                </div>>
+                </div>
                 <!-- end header inner -->
 
                 <!-- end header -->
@@ -43,24 +43,6 @@
         </div>
     </div>
     <!-- end news shoes -->
-
-    <!-- end Categories -->
-
-<%--    <section>--%>
-<%--        <!--  save -->--%>
-<%--        <%@ include file="layout/saleoff.jsp"%>--%>
-<%--        <!-- end save -->--%>
-<%--    </section>--%>
-
-    <!-- news Sports -->
-<%--    <%@ include file="layout/sports.jsp"%>--%>
-    <!-- end news Sports -->
-
-    <!-- news Kids -->
-<%--    <div id="kids" class="Kids_background">--%>
-<%--        <%@ include file="layout/kid.jsp"%>--%>
-<%--    </div>--%>
-    <!-- end news Kids -->
 
     <!--  footer -->
     <footer>
